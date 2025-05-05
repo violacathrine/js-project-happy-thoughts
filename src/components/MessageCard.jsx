@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CardWrapper = styled.section`
-  max-width: 500px;
+  max-width: 450px;
   margin: 0 auto;
 `;
 
@@ -21,13 +21,13 @@ const Card = styled.div`
 `;
 
 const MessageText = styled.p`
-  font-size: 18px;
   align-self: start;
+  font-weight: 500;
   margin: 10px;
 `;
 
 const Timestamp = styled.small`
-  font-size: 16px;
+  font-size: 14px;
   font-family: arial;
   color: gray;
   align-self: flex-end;
