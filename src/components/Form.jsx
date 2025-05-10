@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { MessageCard } from "./MessageCard";
-import { HeartIcon } from './HeartIcon';
+import { HeartIcon } from "./HeartIcon";
 import {
   FormWrapper,
   StyledForm,
@@ -11,14 +10,11 @@ import {
   StyledErrorMessage,
 } from "./Form.styles";
 
-export const Form = () => {
+export const Form = ({ onSubmitMessage }) => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-
+  const [error, setError] = useState("");
   const maxLength = 140;
   const isTooLong = message.length > maxLength;
-
-  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,48 +31,37 @@ export const Form = () => {
 
     setError("");
 
-    const capitalizedMessage =
-      message.charAt(0).toUpperCase() + message.slice(1);
-
-    const newMessage = {
-      id: Date.now(),
-      text: capitalizedMessage,
-      createdAt: new Date(),
-    };
-
-    setMessages([newMessage, ...messages]);
+    onSubmitMessage(message);
     setMessage("");
   };
 
   return (
-    <>
-      <FormWrapper>
-        <StyledForm onSubmit={handleSubmit}>
-          <StyledLabel>
-            What's making you happy today?
-            <StyledTextarea
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  handleSubmit(event);
-                }
-              }}
-            />
-          </StyledLabel>
+    <FormWrapper>
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledLabel>
+          What's making you happy today?
+          <StyledTextarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+          />
+        </StyledLabel>
 
-          <StyledInfoCharacterText $exceedsLimit={isTooLong}>
-            {maxLength - message.length} characters remaining
-          </StyledInfoCharacterText>
+        <StyledInfoCharacterText $exceedsLimit={isTooLong}>
+          {maxLength - message.length} characters remaining
+        </StyledInfoCharacterText>
 
-          {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
+        {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
 
-          <StyledButton type="submit">
-            <HeartIcon /> Send Happy Thought <HeartIcon />
-          </StyledButton>
-        </StyledForm>
-      </FormWrapper>
-    </>
+        <StyledButton type="submit">
+          <HeartIcon /> Send Happy Thought <HeartIcon />
+        </StyledButton>
+      </StyledForm>
+    </FormWrapper>
   );
 };

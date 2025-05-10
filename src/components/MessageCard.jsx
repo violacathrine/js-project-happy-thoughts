@@ -14,13 +14,14 @@ const CardFadeIn = keyframes`
 
 const CardWrapper = styled.section`
   max-width: 450px;
-  margin: 0 auto;
+  margin: 5px;
 `;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f8f8f8;
+  background: rgb(255, 255, 255);
+  width: 100%;
   border: 1px solid #ccc;
   padding: 16px;
   box-shadow: 7px 7px 0px rgb(0, 0, 0);
@@ -63,13 +64,25 @@ const Timestamp = styled.small`
   margin: 10px;
 `;
 
-const getMinutesAgo = (date) => {
+const getTimeAgo = (date) => {
   const now = new Date();
   const then = new Date(date);
-  const diffInMinutes = Math.floor((now - then) / 1000 / 60);
-  return diffInMinutes === 0
-    ? "Just now"
-    : `${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
+  const diffInSeconds = Math.floor((now - then) / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInSeconds < 60) {
+    return "Just now";
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
+  } else if (diffInDays === 1) {
+    return "Yesterday";
+  } else {
+    return `${diffInDays} days ago`;
+  }
 };
 
 export const MessageCard = ({ message, onLike }) => {
@@ -80,12 +93,11 @@ export const MessageCard = ({ message, onLike }) => {
         <BottomRow>
           <LeftPart>
             <LikeButton
-              thoughtId={message._id}
               hearts={message.hearts}
-              onLike={onLike}
+              onClick={() => onLike(message._id)}
             />
           </LeftPart>
-          <RightPart>{getMinutesAgo(message.createdAt)}</RightPart>
+          <RightPart>{getTimeAgo(message.createdAt)}</RightPart>
         </BottomRow>
       </Card>
     </CardWrapper>

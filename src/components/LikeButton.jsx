@@ -21,7 +21,6 @@ const HeartWrapper = styled.button`
   cursor: pointer;
   padding: 0;
   transition: transform 0.2s ease;
-
 `;
 
 const LikeCount = styled.span`
@@ -30,22 +29,10 @@ const LikeCount = styled.span`
   font-family: Arial, sans-serif;
 `;
 
-export const LikeButton = ({ thoughtId, hearts, onLike }) => {
-  const handleLike = () => {
-    fetch(
-      `https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts/${thoughtId}/like`,
-      {
-        method: "POST",
-      }
-    )
-      .then((res) => res.json())
-      .then(() => onLike())
-      .catch((error) => console.error("Error liking thought:", error));
-  };
-
+export const LikeButton = ({ hearts, onClick }) => {
   return (
     <LikeContainer>
-      <HeartWrapper onClick={handleLike}>
+      <HeartWrapper onClick={onClick}>
         <HeartIcon size="1.3rem" />
       </HeartWrapper>
       <LikeCount>x {hearts}</LikeCount>

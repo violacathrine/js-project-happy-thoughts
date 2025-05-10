@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormWrapper = styled.section`
   max-width: 450px;
-  margin: 0 auto;
+  margin: 5px;
 `;
 
 export const StyledForm = styled.form`
@@ -40,16 +40,17 @@ export const StyledInfoCharacterText = styled.p`
 
 export const StyledButton = styled.button`
   display: flex;
-  font-family: courier new;
+  width: 250px;
+  font-family: inherit;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 6px;
   padding: 10px 16px;
   border: none;
   border-radius: 25px;
   background-color: rgb(255, 166, 178);
   color: black;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
 

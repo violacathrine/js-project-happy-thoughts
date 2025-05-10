@@ -8,8 +8,10 @@ export const GlobalStyles = createGlobalStyle`
 }
 
 body {
+  display: flex;
+  justify-content: center;
   background-color:rgba(224, 203, 200, 0.23);
-  font-family: courier new;
+  font-family: roboto mono;
 }
 
   h1 {
@@ -18,14 +20,11 @@ body {
     font-family: verdana;
     margin: 100px 0 16px;
     font-size: 48px;
-    color: 
   }
 
   p {
-    font-family: courier new;
     line-height: 1.6;
     margin: 0 0 16px;
     font-size: 17px;
   }
-
 `;
