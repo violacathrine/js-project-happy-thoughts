@@ -7,14 +7,12 @@ export const FormWrapper = styled.section`
 
 export const StyledForm = styled.form`
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
-  background-color: rgba(237, 220, 217, 0.65);
-  height: auto;
-  width: auto;
-  border: 2px solid #264143;
-  box-shadow: 7px 7px 0px #e99f4c;
-  border-radius: 5px;
+  background:rgb(237, 237, 237);
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 7px 7px 0px rgb(0, 0, 0);
 `;
 
 export const StyledLabel = styled.label`
@@ -26,30 +24,34 @@ export const StyledLabel = styled.label`
 export const StyledTextarea = styled.textarea`
   outline: none;
   width: 100%;
-  border: 2px solid #264143;
+  border: 1px solid #ccc;
+  padding: 8px;
   margin-top: 10px;
   font-size: 15px;
+  font-family: inherit;
   resize: none;
 `;
 
 export const StyledInfoCharacterText = styled.p`
   font-size: 14px;
   margin: 0px 10px 0px;
-  color: ${(props) => (props.exceedsLimit ? "red" : "gray")};
+  color: ${(props) => (props.$exceedsLimit ? "red" : "gray")};
 `;
 
 export const StyledButton = styled.button`
-  padding: 8px;
-  margin: 10px;
+  padding: 10px 16px;
+  margin-top: 16px;
   font-size: 16px;
-  background: rgb(244, 150, 197);
+  background:rgba(255, 94, 126, 0.72);
   font-weight: 500;
-  border-radius: 50px;
+  border-radius: 30px;
   cursor: pointer;
   border: none;
+  font-family: inherit;
+  color: black;
 
   &:hover {
-    background: rgb(230, 130, 180);
+    opacity: 0.9;
   }
 `;
 

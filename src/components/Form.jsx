@@ -26,6 +26,7 @@ export const Form = () => {
       setError("Your message is too short.");
       return;
     }
+
     if (message.length > maxLength) {
       setError("Your message is too long.");
       return;
@@ -63,17 +64,16 @@ export const Form = () => {
               }}
             />
           </StyledLabel>
-          <StyledInfoCharacterText exceedsLimit={isTooLong}>
+
+          <StyledInfoCharacterText $exceedsLimit={isTooLong}>
             {maxLength - message.length} characters remaining
           </StyledInfoCharacterText>
+
           {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
-          <StyledButton type="submit">Send some 🩷</StyledButton>
+
+          <StyledButton type="submit">❤️ Send Happy Thought ❤️</StyledButton>
         </StyledForm>
       </FormWrapper>
-
-      {messages.map((msg) => (
-        <MessageCard key={msg.id} message={msg} />
-      ))}
     </>
   );
 };

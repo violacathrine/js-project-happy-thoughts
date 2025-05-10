@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
 
 body {
   background-color:rgba(224, 203, 200, 0.23);
-  font-family: arial;
+  font-family: courier new;
 }
 
   h1 {
@@ -22,10 +22,10 @@ body {
   }
 
   p {
-    font-family: arial;
+    font-family: courier new;
     line-height: 1.6;
     margin: 0 0 16px;
-    font-size: 16px;
+    font-size: 17px;
   }
 
 `;

@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { LikeButton } from "./LikeButton";
+
+const CardFadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const CardWrapper = styled.section`
   max-width: 450px;
@@ -6,24 +18,38 @@ const CardWrapper = styled.section`
 `;
 
 const Card = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
-  background-color: rgba(237, 220, 217, 0.03);
-  height: auto;
-  width: auto;
-  border: 2px solid #264143;
-  border-radius: 5px;
-  box-shadow: 7px 7px 0px #e99f4c;
+  background-color: #f8f8f8;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 7px 7px 0px rgb(0, 0, 0);
   margin: 30px 0px 30px;
   overflow: hidden;
   word-break: break-word;
+  animation: ${CardFadeIn} 0.5s ease-out;
+  padding: 10px;
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+`;
+
+const BottomRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
 `;
 
 const MessageText = styled.p`
   align-self: start;
   font-weight: 500;
-  margin: 10px;
+  margin: 0;
+  padding-right: 30px; // plats för hjärtat
 `;
 
 const Timestamp = styled.small`
@@ -43,12 +69,21 @@ const getMinutesAgo = (date) => {
     : `${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
 };
 
-export const MessageCard = ({ message }) => {
+export const MessageCard = ({ message, onLike }) => {
   return (
     <CardWrapper>
       <Card>
-        <MessageText>{message.text}</MessageText>
+      <TopRow>
+  <MessageText>{message.message}</MessageText>
+  <LikeButton
+    thoughtId={message._id}
+    hearts={message.hearts}
+    onLike={onLike}
+  />
+</TopRow>
+<BottomRow>
         <Timestamp>{getMinutesAgo(message.createdAt)}</Timestamp>
+        </BottomRow>
       </Card>
     </CardWrapper>
   );

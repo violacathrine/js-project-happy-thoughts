@@ -1,4 +1,5 @@
 import { Form } from "./components/Form";
+import { MessageList } from "./components/MessageList";
 import { GlobalStyles } from "./GlobalStyles";
 
 export const App = () => {
@@ -7,6 +8,7 @@ export const App = () => {
       <GlobalStyles />
       <h1>Happy Thoughts</h1>
       <Form />
+      <MessageList />
     </>
   );
 };
