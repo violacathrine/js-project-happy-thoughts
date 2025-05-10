@@ -1,29 +1,33 @@
 import styled from "styled-components";
+import { HeartIcon } from "./HeartIcon";
 
 const LikeContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 `;
 
-const HeartButton = styled.button`
-  background: transparent;
+const HeartWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eaeaea;
+
   border: none;
   cursor: pointer;
-  font-size: 20px;
   padding: 0;
-  margin: 0;
+  transition: transform 0.2s ease;
 
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 const LikeCount = styled.span`
   font-size: 14px;
-  color: #333;
-  white-space: nowrap;
-  font-family: arial;
+  color: #888;
+  font-family: Arial, sans-serif;
 `;
 
 export const LikeButton = ({ thoughtId, hearts, onLike }) => {
@@ -41,7 +45,9 @@ export const LikeButton = ({ thoughtId, hearts, onLike }) => {
 
   return (
     <LikeContainer>
-      <HeartButton onClick={handleLike}>🩷</HeartButton>
+      <HeartWrapper onClick={handleLike}>
+        <HeartIcon size="1.3rem" />
+      </HeartWrapper>
       <LikeCount>x {hearts}</LikeCount>
     </LikeContainer>
   );

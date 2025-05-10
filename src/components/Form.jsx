@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MessageCard } from "./MessageCard";
+import { HeartIcon } from './HeartIcon';
 import {
   FormWrapper,
   StyledForm,
@@ -71,7 +72,9 @@ export const Form = () => {
 
           {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
 
-          <StyledButton type="submit">❤️ Send Happy Thought ❤️</StyledButton>
+          <StyledButton type="submit">
+            <HeartIcon /> Send Happy Thought <HeartIcon />
+          </StyledButton>
         </StyledForm>
       </FormWrapper>
     </>

@@ -8,7 +8,7 @@ export const FormWrapper = styled.section`
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  background:rgb(237, 237, 237);
+  background: rgb(237, 237, 237);
   width: 100%;
   border: 1px solid #ccc;
   padding: 16px;
@@ -39,19 +39,22 @@ export const StyledInfoCharacterText = styled.p`
 `;
 
 export const StyledButton = styled.button`
+  display: flex;
+  font-family: courier new;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 10px 16px;
-  margin-top: 16px;
-  font-size: 16px;
-  background:rgba(255, 94, 126, 0.72);
-  font-weight: 500;
-  border-radius: 30px;
-  cursor: pointer;
   border: none;
-  font-family: inherit;
+  border-radius: 25px;
+  background-color: rgb(255, 166, 178);
   color: black;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
 
   &:hover {
-    opacity: 0.9;
+    background-color: pink;
   }
 `;
 

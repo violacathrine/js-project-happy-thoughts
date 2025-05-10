@@ -21,28 +21,31 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f8f8f8;
-  width: 100%;
   border: 1px solid #ccc;
   padding: 16px;
   box-shadow: 7px 7px 0px rgb(0, 0, 0);
-  margin: 30px 0px 30px;
-  overflow: hidden;
-  word-break: break-word;
+  margin: 30px 0;
   animation: ${CardFadeIn} 0.5s ease-out;
-  padding: 10px;
-`;
-
-const TopRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
+  word-break: break-word;
 `;
 
 const BottomRow = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin-top: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+`;
+
+const LeftPart = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const RightPart = styled.div`
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: gray;
 `;
 
 const MessageText = styled.p`
@@ -73,16 +76,16 @@ export const MessageCard = ({ message, onLike }) => {
   return (
     <CardWrapper>
       <Card>
-      <TopRow>
-  <MessageText>{message.message}</MessageText>
-  <LikeButton
-    thoughtId={message._id}
-    hearts={message.hearts}
-    onLike={onLike}
-  />
-</TopRow>
-<BottomRow>
-        <Timestamp>{getMinutesAgo(message.createdAt)}</Timestamp>
+        <MessageText>{message.message}</MessageText>
+        <BottomRow>
+          <LeftPart>
+            <LikeButton
+              thoughtId={message._id}
+              hearts={message.hearts}
+              onLike={onLike}
+            />
+          </LeftPart>
+          <RightPart>{getMinutesAgo(message.createdAt)}</RightPart>
         </BottomRow>
       </Card>
     </CardWrapper>
