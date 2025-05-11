@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { LikeButton } from "./LikeButton";
+import { getLikedThoughts } from "../utils/localLikes";
 
 const CardFadeIn = keyframes`
   from {
@@ -23,7 +24,7 @@ const Card = styled.div`
   background: rgb(255, 255, 255);
   width: 100%;
   border: 1px solid #ccc;
-  padding: 16px;
+  padding: 10px 16px;
   box-shadow: 7px 7px 0px rgb(0, 0, 0);
   margin: 30px 0;
   animation: ${CardFadeIn} 0.5s ease-out;
@@ -53,7 +54,7 @@ const MessageText = styled.p`
   align-self: start;
   font-weight: 500;
   margin: 0;
-  padding-right: 30px; // plats för hjärtat
+  padding-right: 30px;
 `;
 
 const Timestamp = styled.small`
@@ -86,6 +87,9 @@ const getTimeAgo = (date) => {
 };
 
 export const MessageCard = ({ message, onLike }) => {
+  const likedThoughts = getLikedThoughts();
+  const isLiked = likedThoughts[message._id];
+
   return (
     <CardWrapper>
       <Card>
@@ -95,6 +99,7 @@ export const MessageCard = ({ message, onLike }) => {
             <LikeButton
               hearts={message.hearts}
               onClick={() => onLike(message._id)}
+              isLiked={isLiked}
             />
           </LeftPart>
           <RightPart>{getTimeAgo(message.createdAt)}</RightPart>

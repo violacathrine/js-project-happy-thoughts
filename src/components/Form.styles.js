@@ -18,15 +18,14 @@ export const StyledForm = styled.form`
 export const StyledLabel = styled.label`
   color: rgb(0, 0, 0);
   font-size: 16px;
-  margin: 10px 10px 0px;
+  margin: 0px 0px 10px;
 `;
 
 export const StyledTextarea = styled.textarea`
   outline: none;
   width: 100%;
   border: 1px solid #ccc;
-  padding: 8px;
-  margin-top: 10px;
+  padding: 15px;
   font-size: 15px;
   font-family: inherit;
   resize: none;
@@ -34,7 +33,7 @@ export const StyledTextarea = styled.textarea`
 
 export const StyledInfoCharacterText = styled.p`
   font-size: 14px;
-  margin: 0px 10px 0px;
+  margin: 0px;
   color: ${(props) => (props.$exceedsLimit ? "red" : "gray")};
 `;
 
@@ -52,7 +51,7 @@ export const StyledButton = styled.button`
   color: black;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
+  margin: 10px 0px;
 
   &:hover {
     background-color: pink;

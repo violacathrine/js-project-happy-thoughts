@@ -38,19 +38,21 @@ export const Form = ({ onSubmitMessage }) => {
   return (
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit}>
-        <StyledLabel>
+        <StyledLabel htmlFor="thought">
           What's making you happy right now?
-          <StyledTextarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSubmit(e);
-              }
-            }}
-          />
         </StyledLabel>
+        
+        <StyledTextarea
+          id="thought"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit(e);
+            }
+          }}
+        />
 
         <StyledInfoCharacterText $exceedsLimit={isTooLong}>
           {maxLength - message.length} characters remaining

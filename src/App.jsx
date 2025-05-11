@@ -6,11 +6,17 @@ import { GlobalStyles } from "./GlobalStyles";
 import { Loader } from "./components/Loader";
 import { Logo } from "./components/Logo";
 import { Footer } from "./components/Footer";
+import {
+  getLikedThoughts,
+  saveLikedThought,
+  getLikeCount,
+} from "./utils/localLikes";
 
 export const App = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [posting, setPosting] = useState(false);
+  const [likeCount, setLikeCount] = useState(getLikeCount());
 
   // Get all messages
   const getMessages = async () => {
@@ -53,13 +59,19 @@ export const App = () => {
         msg._id === id ? { ...msg, hearts: msg.hearts + 1 } : msg
       )
     );
-
+  
+    if (!getLikedThoughts()[id]) {
+      saveLikedThought(id);
+      setLikeCount(getLikeCount()); 
+    }
+  
     try {
       await likeThought(id);
     } catch (error) {
       console.error("Like failed", error);
     }
   };
+  
 
   useEffect(() => {
     getMessages();
@@ -73,7 +85,7 @@ export const App = () => {
       <Form onSubmitMessage={handleNewMessage} posting={posting} />
       {!loading && posting && <Loader />}
       <MessageList messages={messages} loading={loading} onLike={handleLike} />
-      <Footer />
+      <Footer likeCount={likeCount} />
     </>
   );
 };

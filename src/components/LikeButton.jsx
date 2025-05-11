@@ -15,7 +15,7 @@ const HeartWrapper = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #eaeaea;
+  background-color: ${(props) => (props.$liked ? "#FFA6B2" : "#eaeaea")};
 
   border: none;
   cursor: pointer;
@@ -29,11 +29,11 @@ const LikeCount = styled.span`
   font-family: Arial, sans-serif;
 `;
 
-export const LikeButton = ({ hearts, onClick }) => {
+export const LikeButton = ({ hearts, onClick, isLiked }) => {
   return (
     <LikeContainer>
-      <HeartWrapper type="button" onClick={onClick}>
-        <HeartIcon size="1.3rem" />
+      <HeartWrapper type="button" onClick={onClick} $liked={isLiked}>
+        <HeartIcon size="20px" />
       </HeartWrapper>
       <LikeCount>x {hearts}</LikeCount>
     </LikeContainer>
