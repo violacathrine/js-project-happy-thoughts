@@ -1,11 +1,10 @@
-# Happy Thoughts 😄
+# Happy Thoughts
 
 This is a cheerful, responsive messaging app where users can post short, happy messages and like each other's thoughts - built with React and Styled Components.
 
 ## 🌐 Live Demo
-👉 [View the live site here](https://happythoughtsbyc.netlify.app/)  
 
----
+👉 [View the live site here](https://happythoughtsbyc.netlify.app/)
 
 ## ✨ Features
 
@@ -16,8 +15,6 @@ This is a cheerful, responsive messaging app where users can post short, happy m
 - Optimistic UI updates when posting and liking
 - Visually highlights liked posts
 - Custom loading spinner while fetching/posting
-
----
 
 ## 🧱 Built With
 
@@ -30,4 +27,4 @@ This is a cheerful, responsive messaging app where users can post short, happy m
 
 ## 👩‍💻 Created by
 
-Made with love by **Cathi** 
+Created with ❤️ by **Cathi**
