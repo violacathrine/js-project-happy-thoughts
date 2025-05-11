@@ -17,7 +17,7 @@ export const StyledForm = styled.form`
 
 export const StyledLabel = styled.label`
   color: rgb(0, 0, 0);
-  font-size: 18px;
+  font-size: 16px;
   margin: 10px 10px 0px;
 `;
 

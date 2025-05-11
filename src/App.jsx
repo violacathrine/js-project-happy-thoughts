@@ -4,32 +4,61 @@ import { Form } from "./components/Form";
 import { MessageList } from "./components/MessageList";
 import { GlobalStyles } from "./GlobalStyles";
 import { Loader } from "./components/Loader";
+import { Logo } from "./components/Logo";
+import { Footer } from "./components/Footer";
 
 export const App = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [posting, setPosting] = useState(false);
 
   // Get all messages
-  const getMessages = () => {
-    setLoading(true);
-    fetchThoughts()
-      .then(setMessages)
-      .catch((error) => console.error("Fetch failed", error))
-      .finally(() => setLoading(false));
+  const getMessages = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchThoughts();
+      setMessages(data);
+    } catch (error) {
+      console.error("Fetch failed", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Post new message
-  const handleNewMessage = (message) => {
-    postThought(message)
-      .then(getMessages)
-      .catch((error) => console.error("Post failed", error));
+  const handleNewMessage = async (message) => {
+    const optimisticThought = {
+      _id: Date.now().toString(),
+      message,
+      hearts: 0,
+      createdAt: new Date().toISOString(),
+    };
+
+    setMessages((prev) => [optimisticThought, ...prev]);
+    setPosting(true);
+
+    try {
+      await postThought(message);
+      await getMessages();
+    } catch (error) {
+      console.error("Post failed", error);
+    } finally {
+      setPosting(false);
+    }
   };
 
-  // Like message
-  const handleLike = (id) => {
-    likeThought(id)
-      .then(getMessages)
-      .catch((error) => console.error("Like failed", error));
+  const handleLike = async (id) => {
+    setMessages((prevMessages) =>
+      prevMessages.map((msg) =>
+        msg._id === id ? { ...msg, hearts: msg.hearts + 1 } : msg
+      )
+    );
+
+    try {
+      await likeThought(id);
+    } catch (error) {
+      console.error("Like failed", error);
+    }
   };
 
   useEffect(() => {
@@ -39,9 +68,12 @@ export const App = () => {
   return (
     <>
       <GlobalStyles />
+      <Logo />
       <h1>Happy Thoughts</h1>
-      <Form onSubmitMessage={handleNewMessage} />
+      <Form onSubmitMessage={handleNewMessage} posting={posting} />
+      {!loading && posting && <Loader />}
       <MessageList messages={messages} loading={loading} onLike={handleLike} />
+      <Footer />
     </>
   );
 };

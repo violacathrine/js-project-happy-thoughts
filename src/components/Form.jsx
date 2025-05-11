@@ -39,7 +39,7 @@ export const Form = ({ onSubmitMessage }) => {
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit}>
         <StyledLabel>
-          What's making you happy today?
+          What's making you happy right now?
           <StyledTextarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}

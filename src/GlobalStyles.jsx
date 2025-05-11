@@ -18,8 +18,9 @@ body {
     display: flex;
     justify-content: center;
     font-family: verdana;
-    margin: 100px 0 16px;
+    margin: 20px 0 16px;
     font-size: 48px;
+    color:#FF5364
   }
 
   p {
