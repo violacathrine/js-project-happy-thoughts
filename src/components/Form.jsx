@@ -41,9 +41,10 @@ export const Form = ({ onSubmitMessage }) => {
         <StyledLabel htmlFor="thought">
           What's making you happy right now?
         </StyledLabel>
-        
+
         <StyledTextarea
           id="thought"
+          placeholder="Type your happy thought here..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => {

@@ -29,6 +29,15 @@ export const StyledTextarea = styled.textarea`
   font-size: 15px;
   font-family: inherit;
   resize: none;
+
+  &::placeholder {
+    color: #aaa;
+    font-size: 13px;
+  }
+
+  &:focus {
+    border: 2px solid pink;
+  }
 `;
 
 export const StyledInfoCharacterText = styled.p`
@@ -60,7 +69,7 @@ export const StyledButton = styled.button`
 
 export const StyledErrorMessage = styled.p`
   color: red;
-  margin: 10px;
+  margin: 0px;
   font-size: 14px;
   font-weight: 500;
 `;
