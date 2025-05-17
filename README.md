@@ -24,6 +24,8 @@ This is a cheerful, responsive messaging app where users can post short, happy m
 - Public Happy Thoughts API (Technigo)
 - HTML5, CSS3
 - `localStorage` for persistent like tracking
+- [Happy thoughts icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/happy-thoughts)
+
 
 ## 👩‍💻 Created by
 
