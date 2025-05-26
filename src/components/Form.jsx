@@ -61,6 +61,7 @@ export const Form = ({ onSubmitMessage }) => {
     <StyledErrorMessage>{error}</StyledErrorMessage>
   ) : null;
 
+
   return (
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit}>
