@@ -25,7 +25,7 @@ const HeartWrapper = styled.button`
 
 const LikeCount = styled.span`
   font-size: 14px;
-  color: #888;
+  color: #333333;
   font-family: Arial, sans-serif;
 `;
 
