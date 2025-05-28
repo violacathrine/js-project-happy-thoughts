@@ -24,7 +24,7 @@ export const StyledLabel = styled.label`
 export const StyledTextarea = styled.textarea`
   outline: none;
   width: 100%;
-  border: 1px solid #33333;
+  border: 1px solid #cccccc;
   padding: 15px;
   font-size: 15px;
   font-family: inherit;
@@ -43,7 +43,7 @@ export const StyledTextarea = styled.textarea`
 export const StyledInfoCharacterText = styled.p`
   font-size: 14px;
   margin: 0px;
-  color: ${(props) => (props.$exceedsLimit ? "red" : "gray")};
+  color: ${(props) => (props.$exceedsLimit ? "red" : "#333333")};
 `;
 
 export const StyledButton = styled.button`
