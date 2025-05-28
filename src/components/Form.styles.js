@@ -24,7 +24,7 @@ export const StyledLabel = styled.label`
 export const StyledTextarea = styled.textarea`
   outline: none;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #33333;
   padding: 15px;
   font-size: 15px;
   font-family: inherit;
