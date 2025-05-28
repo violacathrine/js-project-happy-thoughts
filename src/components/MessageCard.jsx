@@ -23,7 +23,7 @@ const Card = styled.div`
   flex-direction: column;
   background: rgb(255, 255, 255);
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #333333;
   padding: 10px 16px;
   box-shadow: 7px 7px 0px rgb(0, 0, 0);
   margin: 30px 0;
@@ -47,7 +47,7 @@ const LeftPart = styled.div`
 const RightPart = styled.div`
   font-size: 14px;
   font-family: Arial, sans-serif;
-  color: gray;
+  color: #333333;
 `;
 
 const MessageText = styled.p`
