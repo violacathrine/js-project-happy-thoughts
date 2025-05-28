@@ -83,7 +83,9 @@ export const Form = ({ onSubmitMessage }) => {
 
         {errorMessageElement}
 
-        <StyledButton type="submit">
+        <StyledButton type="submit"
+          title="Send happy thought"
+        >
           <HeartIcon /> Send Happy Thought <HeartIcon />
         </StyledButton>
       </StyledForm>

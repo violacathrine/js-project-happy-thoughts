@@ -32,8 +32,14 @@ const LikeCount = styled.span`
 export const LikeButton = ({ hearts, onClick, isLiked }) => {
   return (
     <LikeContainer>
-      <HeartWrapper type="button" onClick={onClick} $liked={isLiked}>
-        <HeartIcon size="20px" />
+      <HeartWrapper
+        type="button"
+        onClick={onClick}
+        $liked={isLiked}
+        aria-label="Like this message"
+        title="Like"
+      >
+        <HeartIcon size="20px" aria-hidden="true" />
       </HeartWrapper>
       <LikeCount>x {hearts}</LikeCount>
     </LikeContainer>
