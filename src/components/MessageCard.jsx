@@ -60,7 +60,7 @@ const MessageText = styled.p`
 const Timestamp = styled.small`
   font-size: 14px;
   font-family: arial;
-  color: gray;
+  color: #333333;
   align-self: flex-end;
   margin: 10px;
 `;
