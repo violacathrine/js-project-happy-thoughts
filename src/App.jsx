@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchThoughts, postThought, likeThought } from "./api/thoughts";
+import { fetchThoughts, postThought, likeThought, deleteThought } from "./api/thoughts";
 import { Form } from "./components/Form";
 import { MessageList } from "./components/MessageList";
 import { GlobalStyles } from "./GlobalStyles";
@@ -71,6 +71,15 @@ export const App = () => {
       console.error("Like failed", error);
     }
   };
+
+  const handleDeleteThought = async (id) => {
+    try {
+      await deleteThought(id);
+      setMessages((prev) => prev.filter((msg) => msg._id !== id));
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
   
 
   useEffect(() => {
@@ -84,7 +93,7 @@ export const App = () => {
       <h1>Happy Thoughts</h1>
       <Form onSubmitMessage={handleNewMessage} posting={posting} />
       {!loading && posting && <Loader />}
-      <MessageList messages={messages} loading={loading} onLike={handleLike} />
+      <MessageList messages={messages} loading={loading} onLike={handleLike} onDelete={handleDeleteThought} />
       <Footer likeCount={likeCount} />
     </>
   );

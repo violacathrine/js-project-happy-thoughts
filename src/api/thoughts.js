@@ -28,3 +28,15 @@ export const likeThought = async (id) => {
   if (!res.ok) throw new Error("Failed to like message");
   return res.json();
 };
+
+// DELETE message
+// DELETE message
+export const deleteThought = async (id) => {
+  const res = await fetch(`${BASE_URL}/thoughts/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete message");
+  return res.json();
+};
+
+

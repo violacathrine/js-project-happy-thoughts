@@ -87,7 +87,7 @@ const getTimeAgo = (date) => {
   }
 };
 
-export const MessageCard = ({ message, onLike }) => {
+export const MessageCard = ({ message, onLike, onDelete }) => {
   const likedThoughts = getLikedThoughts();
   const isLiked = likedThoughts[message._id];
 
@@ -102,6 +102,7 @@ export const MessageCard = ({ message, onLike }) => {
               onClick={() => onLike(message._id)}
               isLiked={isLiked}
             />
+            <button onClick={() => onDelete(message._id)}>🗑</button>
           </LeftPart>
           <RightPart>{getTimeAgo(message.createdAt)}</RightPart>
         </BottomRow>
