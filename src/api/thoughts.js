@@ -30,7 +30,6 @@ export const likeThought = async (id) => {
 };
 
 // DELETE message
-// DELETE message
 export const deleteThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}`, {
     method: "DELETE",
