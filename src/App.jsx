@@ -23,7 +23,7 @@ export const App = () => {
     try {
       setLoading(true);
       const data = await fetchThoughts();
-      setMessages(data);
+      setMessages(data.results);
     } catch (error) {
       console.error("Fetch failed", error);
     } finally {
