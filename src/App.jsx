@@ -81,10 +81,24 @@ export const App = () => {
     }
   };
   
-
+  // Wake up backend and fetch messages
   useEffect(() => {
-    getMessages();
+    const wakeUpAndFetch = async () => {
+      setLoading(true);
+      try {
+        await fetch("https://js-project-api-cathi.onrender.com/");
+
+        await getMessages();
+      } catch (error) {
+        console.error("Failed to wake backend or fetch data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    wakeUpAndFetch();
   }, []);
+  
 
   return (
     <>
