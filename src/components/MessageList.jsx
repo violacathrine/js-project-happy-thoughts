@@ -1,15 +1,24 @@
 import { MessageCard } from "./MessageCard";
 import { Loader } from "./Loader";
 
-export const MessageList = ({ messages = [], loading, onLike }) => {
+export const MessageList = ({ messages = [], loading, onLike, onDelete }) => {
   if (loading) {
     return <Loader />;
   }
 
+  const sortedMessages = [...messages].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
   return (
     <>
-      {messages.map((msg) => (
-        <MessageCard key={msg._id} message={msg} onLike={onLike} />
+      {sortedMessages.map((msg) => (
+        <MessageCard
+          key={msg._id}
+          message={msg}
+          onLike={onLike}
+          onDelete={onDelete}
+        />
       ))}
     </>
   );
