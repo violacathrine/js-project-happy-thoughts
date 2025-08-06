@@ -1,7 +1,7 @@
 import { MessageCard } from "./MessageCard";
 import { Loader } from "./Loader";
 
-export const MessageList = ({ messages = [], loading, onLike, onDelete }) => {
+export const MessageList = ({ messages = [], loading, onLike, onDelete, onEdit }) => {
   if (loading) {
     return <Loader />;
   }
@@ -18,6 +18,7 @@ export const MessageList = ({ messages = [], loading, onLike, onDelete }) => {
           message={msg}
           onLike={onLike}
           onDelete={onDelete}
+          onEdit={() => onEdit(msg._id)}
         />
       ))}
     </>

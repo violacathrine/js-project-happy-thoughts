@@ -11,21 +11,39 @@ export const fetchThoughts = async () => {
 export const postThought = async (message) => {
   const res = await fetch(`${BASE_URL}/thoughts`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),
   });
   if (!res.ok) throw new Error("Failed to post message");
   return res.json();
 };
 
+// PATCH update message
+export const updateThought = async (id, updatedFields) => {
+  const res = await fetch(`${BASE_URL}/thoughts/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedFields),
+  });
+  if (!res.ok) throw new Error("Failed to update message");
+  return res.json();
+};
+
 // LIKE message
 export const likeThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}/like`, {
-    method: "POST",
+    method: "PATCH",
   });
   if (!res.ok) throw new Error("Failed to like message");
+  return res.json();
+};
+
+// UNLIKE message
+export const unlikeThought = async (id) => {
+  const res = await fetch(`${BASE_URL}/thoughts/${id}/unlike`, {
+    method: "PATCH",
+  });
+  if (!res.ok) throw new Error("Failed to unlike message");
   return res.json();
 };
 
@@ -37,5 +55,3 @@ export const deleteThought = async (id) => {
   if (!res.ok) throw new Error("Failed to delete message");
   return res.json();
 };
-
-

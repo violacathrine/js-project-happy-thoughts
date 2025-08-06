@@ -72,8 +72,7 @@ const getTimeAgo = (date) => {
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   const diffInHours = Math.floor(diffInMinutes / 60);
   const diffInDays = Math.floor(diffInHours / 24);
-  
-  
+
   if (diffInSeconds < 60) {
     return "Just now";
   } else if (diffInMinutes < 60) {
@@ -87,9 +86,9 @@ const getTimeAgo = (date) => {
   }
 };
 
-export const MessageCard = ({ message, onLike, onDelete }) => {
+export const MessageCard = ({ message, onLike, onDelete, onEdit }) => {
   const likedThoughts = getLikedThoughts();
-  const isLiked = likedThoughts[message._id];
+  const isLiked = !!likedThoughts[message._id]; // 🔁 Gör detta till boolean
 
   return (
     <CardWrapper>
@@ -103,6 +102,7 @@ export const MessageCard = ({ message, onLike, onDelete }) => {
               isLiked={isLiked}
             />
             <button onClick={() => onDelete(message._id)}>🗑</button>
+            <button onClick={onEdit}>✏️ Edit</button>
           </LeftPart>
           <RightPart>{getTimeAgo(message.createdAt)}</RightPart>
         </BottomRow>
