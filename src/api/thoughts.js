@@ -1,56 +1,78 @@
+// src/api/thoughts.js
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-// GET messages
+// Hämtar inloggnings-token från localStorage
+function getAuthHeader() {
+  const token = localStorage.getItem("token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// GET alla tankar (öppet endpoint)
 export const fetchThoughts = async () => {
   const res = await fetch(`${BASE_URL}/thoughts`);
   if (!res.ok) throw new Error("Failed to fetch thoughts");
   return res.json();
 };
 
-// POST message
+// POST ny tanke (kräver token)
 export const postThought = async (message) => {
   const res = await fetch(`${BASE_URL}/thoughts`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeader(),
+    },
     body: JSON.stringify({ message }),
   });
-  if (!res.ok) throw new Error("Failed to post message");
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || "Failed to post message");
+  }
   return res.json();
 };
 
-// PATCH update message
+// PATCH uppdatera tanke (kräver token)
 export const updateThought = async (id, updatedFields) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeader(),
+    },
     body: JSON.stringify(updatedFields),
   });
-  if (!res.ok) throw new Error("Failed to update message");
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || "Failed to update message");
+  }
   return res.json();
 };
 
-// LIKE message
+// PATCH gilla tanke (kräver token)
 export const likeThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}/like`, {
     method: "PATCH",
+    headers: getAuthHeader(),
   });
   if (!res.ok) throw new Error("Failed to like message");
   return res.json();
 };
 
-// UNLIKE message
+// PATCH ogilla tanke (kräver token)
 export const unlikeThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}/unlike`, {
     method: "PATCH",
+    headers: getAuthHeader(),
   });
   if (!res.ok) throw new Error("Failed to unlike message");
   return res.json();
 };
 
-// DELETE message
+// DELETE tanke (kräver token)
 export const deleteThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}`, {
     method: "DELETE",
+    headers: getAuthHeader(),
   });
   if (!res.ok) throw new Error("Failed to delete message");
   return res.json();

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 
 export function EditThought({ thought, onSave, onCancel }) {
   const [message, setMessage] = useState(thought.message);
-  const [category, setCategory] = useState(thought.category || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Invoke the onSave callback provided by parent
-    await onSave(thought._id, { message, category });
+    await onSave(thought._id, { message });
   };
 
   return (
@@ -23,18 +22,10 @@ export function EditThought({ thought, onSave, onCancel }) {
         required
         style={{ width: "100%", height: 80 }}
       />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="">Välj kategori</option>
-        {["Food", "Work", "Life", "Other"].map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select>
       <div style={{ marginTop: 8 }}>
-        <button type="submit">Spara</button>
+        <button type="submit">Save</button>
         <button type="button" onClick={onCancel} style={{ marginLeft: 8 }}>
-          Avbryt
+          Cancel
         </button>
       </div>
     </form>

@@ -85,10 +85,23 @@ const getTimeAgo = (date) => {
     return `${diffInDays} days ago`;
   }
 };
+export const MessageCard = ({
+  message,
+  onLike,
+  onDelete,
+  onEdit,
+  currentUserId,
+}) => {
+  console.log("MSG.USER", message.user);
+  console.log("CURRENT USER ID", currentUserId);
+  // Owner‐ID if available
+  const ownerId = message.user;
 
-export const MessageCard = ({ message, onLike, onDelete, onEdit }) => {
+  // Check if logged-in user is the owner
+  const isOwner = currentUserId === ownerId;
+
   const likedThoughts = getLikedThoughts();
-  const isLiked = !!likedThoughts[message._id]; // 🔁 Gör detta till boolean
+  const isLiked = !!likedThoughts[message._id];
 
   return (
     <CardWrapper>
@@ -101,8 +114,14 @@ export const MessageCard = ({ message, onLike, onDelete, onEdit }) => {
               onClick={() => onLike(message._id)}
               isLiked={isLiked}
             />
-            <button onClick={() => onDelete(message._id)}>🗑</button>
-            <button onClick={onEdit}>✏️ Edit</button>
+
+            {/* Conditional render of Delete/Edit */}
+            {isOwner && (
+              <>
+                <button onClick={() => onDelete(message._id)}>🗑️</button>
+                <button onClick={() => onEdit(message._id)}>✏️</button>
+              </>
+            )}
           </LeftPart>
           <RightPart>{getTimeAgo(message.createdAt)}</RightPart>
         </BottomRow>
