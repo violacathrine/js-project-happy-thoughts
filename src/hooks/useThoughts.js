@@ -1,3 +1,4 @@
+// src/hooks/useThoughts.js
 import { useState, useEffect } from "react";
 import {
   fetchThoughts,
@@ -20,7 +21,7 @@ export function useThoughts() {
   const [posting, setPosting] = useState(false);
   const [likeCount, setLikeCount] = useState(getLikeCount());
 
-  // Fetch all thoughts
+  // 1) Hämta listan från backend
   const getMessages = async () => {
     setLoading(true);
     try {
@@ -37,15 +38,15 @@ export function useThoughts() {
     getMessages();
   }, []);
 
-  // Add a new thought
+  // 2) Posta en ny tanke
   const addMessage = async (message) => {
-    const optimisticThought = {
+    const optimistic = {
       _id: Date.now().toString(),
       message,
       hearts: 0,
       createdAt: new Date().toISOString(),
     };
-    setMessages((prev) => [optimisticThought, ...prev]);
+    setMessages((prev) => [optimistic, ...prev]);
     setPosting(true);
 
     try {
@@ -58,21 +59,19 @@ export function useThoughts() {
     }
   };
 
-  // Like or unlike a thought
+  // 3) Gilla/ogilla
   const toggleLike = async (id) => {
-    const likedThoughts = getLikedThoughts();
-    const isAlreadyLiked = likedThoughts[id];
+    const liked = getLikedThoughts();
+    const isAlready = liked[id];
 
     setMessages((prev) =>
-      prev.map((msg) =>
-        msg._id === id
-          ? { ...msg, hearts: msg.hearts + (isAlreadyLiked ? -1 : 1) }
-          : msg
+      prev.map((m) =>
+        m._id === id ? { ...m, hearts: m.hearts + (isAlready ? -1 : 1) } : m
       )
     );
 
     try {
-      if (isAlreadyLiked) {
+      if (isAlready) {
         await unlikeThought(id);
         removeLikedThought(id);
       } else {
@@ -81,25 +80,27 @@ export function useThoughts() {
       }
       setLikeCount(getLikeCount());
     } catch (err) {
-      console.error("Like/unlike failed", err);
+      console.error("Like toggle failed", err);
     }
   };
 
-  // Remove a thought
+  // 4) Radera en tanke
   const removeMessage = async (id) => {
     try {
       await deleteThought(id);
-      setMessages((prev) => prev.filter((msg) => msg._id !== id));
+      setMessages((prev) => prev.filter((m) => m._id !== id));
     } catch (err) {
       console.error("Delete failed", err);
     }
   };
 
-  // Save edits to a thought
-  const saveMessage = async (id, updatedFields) => {
+  // 5) Uppdatera en tanke
+  const saveMessage = async (id, fields) => {
     try {
-      await updateThought(id, updatedFields);
-      await getMessages();
+      await updateThought(id, fields);
+      setMessages((prev) =>
+        prev.map((m) => (m._id === id ? { ...m, ...fields } : m))
+      );
     } catch (err) {
       console.error("Update failed", err);
     }

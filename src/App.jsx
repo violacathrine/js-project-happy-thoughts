@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useContext, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { useThoughts } from "./hooks/useThoughts";
@@ -11,7 +12,7 @@ import { Logo } from "./components/Logo";
 import { Footer } from "./components/Footer";
 import { Loader } from "./components/Loader";
 
-export function App() {
+export const App = () => {
   const { user, logout } = useContext(AuthContext);
   const {
     messages,
@@ -29,22 +30,28 @@ export function App() {
     <>
       <GlobalStyles />
       <Logo />
-      <h1>Happy Thoughts</h1>
+      <h1 style={{ textAlign: "center", margin: "20px 0" }}>Happy Thoughts</h1>
 
       {!user ? (
-        <div>
+        <div style={{ maxWidth: 400, margin: "0 auto", padding: "20px" }}>
           <h2>Register</h2>
           <RegisterForm />
+          <hr />
           <h2>Login</h2>
           <LoginForm />
         </div>
       ) : (
-        <>
-          <div style={{ textAlign: "right", margin: "0 20px" }}>
+        <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 16,
+            }}
+          >
             <span>Logged in as {user.email}</span>
-            <button onClick={logout} style={{ marginLeft: 8 }}>
-              Logout
-            </button>
+            <button onClick={logout}>Logout</button>
           </div>
 
           <Form onSubmitMessage={addMessage} posting={posting} />
@@ -69,10 +76,10 @@ export function App() {
               currentUserId={user._id}
             />
           )}
-        </>
+        </div>
       )}
 
       <Footer likeCount={likeCount} />
     </>
   );
-}
+};
