@@ -14,13 +14,13 @@ export const fetchThoughts = async () => {
   return res.json();
 };
 
-// POST ny tanke (kräver token)
+// POST ny tanke (fungerar för alla, med eller utan token)
 export const postThought = async (message) => {
   const res = await fetch(`${BASE_URL}/thoughts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeader(),
+      ...getAuthHeader(), // Includes token if user is logged in
     },
     body: JSON.stringify({ message }),
   });
@@ -48,21 +48,27 @@ export const updateThought = async (id, updatedFields) => {
   return res.json();
 };
 
-// PATCH gilla tanke (kräver token)
+// PATCH gilla tanke (fungerar för alla)
 export const likeThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}/like`, {
     method: "PATCH",
-    headers: getAuthHeader(),
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeader(), // Includes token if user is logged in
+    },
   });
   if (!res.ok) throw new Error("Failed to like message");
   return res.json();
 };
 
-// PATCH ogilla tanke (kräver token)
+// PATCH ogilla tanke (fungerar för alla)
 export const unlikeThought = async (id) => {
   const res = await fetch(`${BASE_URL}/thoughts/${id}/unlike`, {
     method: "PATCH",
-    headers: getAuthHeader(),
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeader(), // Includes token if user is logged in
+    },
   });
   if (!res.ok) throw new Error("Failed to unlike message");
   return res.json();

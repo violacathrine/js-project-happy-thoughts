@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { registerUser } from "../api/auth";
 import { AuthContext } from "../context/AuthContext";
+import { AuthForm, ErrorMessage, Input, SubmitButton } from "./AuthForm.styles";
 
-export function RegisterForm() {
+export function RegisterForm({ onSuccess }) {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,22 +14,23 @@ export function RegisterForm() {
     try {
       const res = await registerUser({ email, password });
       login(res);
+      if (onSuccess) onSuccess();
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
+    <AuthForm onSubmit={handleSubmit}>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+      <Input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      <input
+      <Input
         type="password"
         placeholder="Password"
         minLength={8}
@@ -36,7 +38,9 @@ export function RegisterForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Register</button>
-    </form>
+      <SubmitButton type="submit">
+        Register
+      </SubmitButton>
+    </AuthForm>
   );
 }

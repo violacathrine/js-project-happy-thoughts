@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormWrapper = styled.section`
   max-width: 450px;
-  margin: 5px;
+  margin: 5px auto;
 `;
 
 export const StyledForm = styled.form`

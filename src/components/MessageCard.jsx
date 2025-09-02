@@ -15,7 +15,7 @@ const CardFadeIn = keyframes`
 
 const CardWrapper = styled.section`
   max-width: 450px;
-  margin: 5px;
+  margin: 5px auto;
 `;
 
 const Card = styled.div`
@@ -65,6 +65,29 @@ const Timestamp = styled.small`
   margin: 10px;
 `;
 
+const ActionButton = styled.button`
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  color: #666;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #333;
+    color: #333;
+    background: #f5f5f5;
+  }
+  
+  &:active {
+    background: #e0e0e0;
+  }
+`;
+
 const getTimeAgo = (date) => {
   const now = new Date();
   const then = new Date(date);
@@ -92,13 +115,11 @@ export const MessageCard = ({
   onEdit,
   currentUserId,
 }) => {
-  console.log("MSG.USER", message.user);
-  console.log("CURRENT USER ID", currentUserId);
   // Owner‐ID if available
   const ownerId = message.user;
 
-  // Check if logged-in user is the owner
-  const isOwner = currentUserId === ownerId;
+  // Check if logged-in user is the owner - convert ObjectId to string
+  const isOwner = currentUserId === String(ownerId);
 
   const likedThoughts = getLikedThoughts();
   const isLiked = !!likedThoughts[message._id];
@@ -118,8 +139,12 @@ export const MessageCard = ({
             {/* Conditional render of Delete/Edit */}
             {isOwner && (
               <>
-                <button onClick={() => onDelete(message._id)}>🗑️</button>
-                <button onClick={() => onEdit(message._id)}>✏️</button>
+                <ActionButton onClick={() => onEdit(message._id)} title="Edit">
+                  Edit
+                </ActionButton>
+                <ActionButton onClick={() => onDelete(message._id)} title="Delete">
+                  Delete
+                </ActionButton>
               </>
             )}
           </LeftPart>
